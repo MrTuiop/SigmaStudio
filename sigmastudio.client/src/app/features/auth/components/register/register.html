@@ -1,0 +1,99 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <h2>Регистрация</h2>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+      <!-- Логин -->
+      <div class="form-group">
+        <label for="userName">Логин</label>
+        <input type="text"
+               id="userName"
+               formControlName="userName"
+               class="form-control"
+               [class.is-invalid]="registerForm.get('userName')?.invalid && registerForm.get('userName')?.touched" />
+        <div class="invalid-feedback" *ngIf="registerForm.get('userName')?.invalid && registerForm.get('userName')?.touched">
+          Логин должен быть не менее 3 символов
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email"
+               id="email"
+               formControlName="email"
+               class="form-control"
+               [class.is-invalid]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" />
+        <div class="invalid-feedback" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+          Введите корректный email
+        </div>
+      </div>
+
+      <!-- Имя (опционально) -->
+      <div class="form-group">
+        <label for="firstName">Имя</label>
+        <input type="text"
+               id="firstName"
+               formControlName="firstName"
+               class="form-control" />
+      </div>
+
+      <!-- Фамилия (опционально) -->
+      <div class="form-group">
+        <label for="lastName">Фамилия</label>
+        <input type="text"
+               id="lastName"
+               formControlName="lastName"
+               class="form-control" />
+      </div>
+
+      <!-- Пароль -->
+      <div class="form-group">
+        <label for="password">Пароль</label>
+        <input type="password"
+               id="password"
+               formControlName="password"
+               class="form-control"
+               [class.is-invalid]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" />
+        <div class="invalid-feedback" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+          Пароль должен быть не менее 6 символов
+        </div>
+      </div>
+
+      <!-- Подтверждение пароля -->
+      <div class="form-group">
+        <label for="confirmPassword">Подтвердите пароль</label>
+        <input type="password"
+               id="confirmPassword"
+               formControlName="confirmPassword"
+               class="form-control"
+               [class.is-invalid]="registerForm.hasError('passwordMismatch') && registerForm.get('confirmPassword')?.touched" />
+        <div class="invalid-feedback" *ngIf="registerForm.hasError('passwordMismatch')">
+          Пароли не совпадают
+        </div>
+      </div>
+
+      <!-- Сообщения -->
+      <div class="alert alert-danger" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+      <div class="alert alert-success" *ngIf="successMessage">
+        {{ successMessage }}
+      </div>
+
+      <!-- Кнопка регистрации -->
+      <button type="submit"
+              class="btn btn-primary"
+              [disabled]="isLoading">
+        <span *ngIf="isLoading">Регистрация...</span>
+        <span *ngIf="!isLoading">Зарегистрироваться</span>
+      </button>
+    </form>
+
+    <!-- Ссылка на вход -->
+    <div class="auth-footer">
+      <p>Уже есть аккаунт? <a routerLink="/login">Войти</a></p>
+    </div>
+  </div>
+</div>

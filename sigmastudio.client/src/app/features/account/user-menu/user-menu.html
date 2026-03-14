@@ -1,0 +1,55 @@
+<div class="user-menu-container">
+
+  <!-- Кнопка -->
+  <button (click)="toggleMenu()" class="avatar-btn" title="Профиль">
+    <span class="avatar-icon">👤</span>
+    <span class="dropdown-arrow" [class.open]="isMenuOpen">▼</span>
+  </button>
+
+  <!-- Выпадающее меню -->
+  <div class="dropdown-panel" *ngIf="isMenuOpen" (clickOutside)="closeMenu()">
+    <!-- Если пользователь НЕ вошёл -->
+    <ng-container *ngIf="!authService.isLoggedIn()">
+      <div class="menu-section">
+        <p class="user-text">Добро пожаловать! Гость</p>
+        <a routerLink="/login" class="menu-item" (click)="closeMenu()">
+          <span class="icon">🔐</span>
+          <span>Войти</span>
+        </a>
+        <a routerLink="/register" class="menu-item" (click)="closeMenu()">
+          <span class="icon">📝</span>
+          <span>Регистрация</span>
+        </a>
+      </div>
+    </ng-container>
+
+    <!-- Если пользователь вошёл -->
+    <ng-container *ngIf="authService.isLoggedIn()">
+      <div class="menu-section">
+        <p class="user-text">Добро пожаловать! {{authService.userName()}}</p>
+        <a routerLink="/profile" class="menu-item" (click)="closeMenu()">
+          <span class="icon">👤</span>
+          <span>Профиль</span>
+        </a>
+        <a routerLink="/settings" class="menu-item" (click)="closeMenu()">
+          <span class="icon">⚙️</span>
+          <span>Настройки</span>
+        </a>
+      </div>
+
+      <div class="menu-divider"></div>
+
+      <div class="menu-section">
+        <button (click)="toggleTheme()" class="menu-item">
+          <span class="icon">{{ isDarkTheme ? '☀️' : '🌙' }}</span>
+          <span>{{ isDarkTheme ? 'Светлая тема' : 'Тёмная тема' }}</span>
+        </button>
+        <button (click)="logout()" class="menu-item logout">
+          <span class="icon">🚪</span>
+          <span>Выйти</span>
+        </button>
+      </div>
+    </ng-container>
+
+  </div>
+</div>

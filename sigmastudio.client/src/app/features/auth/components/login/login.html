@@ -1,0 +1,52 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <h2>Вход</h2>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+      <!-- Логин или Email -->
+      <div class="form-group">
+        <label for="usernameOrEmail">Логин или Email</label>
+        <input type="text"
+               id="usernameOrEmail"
+               formControlName="usernameOrEmail"
+               class="form-control"
+               [class.is-invalid]="loginForm.get('usernameOrEmail')?.invalid && loginForm.get('usernameOrEmail')?.touched" />
+        <div class="invalid-feedback" *ngIf="loginForm.get('usernameOrEmail')?.invalid && loginForm.get('usernameOrEmail')?.touched">
+          Введите логин или email
+        </div>
+      </div>
+
+      <!-- Пароль -->
+      <div class="form-group">
+        <label for="password">Пароль</label>
+        <input type="password"
+               id="password"
+               formControlName="password"
+               class="form-control"
+               [class.is-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" />
+        <div class="invalid-feedback" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+          Пароль должен быть не менее 6 символов
+        </div>
+      </div>
+
+      <!-- Сообщение об ошибке -->
+      <div class="alert alert-danger" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Кнопка входа -->
+      <button type="submit"
+              class="btn btn-primary"
+              [disabled]="isLoading">
+        <span *ngIf="isLoading">Вход...</span>
+        <span *ngIf="!isLoading">Войти</span>
+      </button>
+    </form>
+
+    <!-- Ссылка на регистрацию -->
+    <div class="auth-footer">
+      <p>Нет аккаунта? <a routerLink="/register">Зарегистрироваться</a></p>
+    </div>
+  </div>
+</div>

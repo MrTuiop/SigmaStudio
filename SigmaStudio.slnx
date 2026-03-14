@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="sigmastudio.client/sigmastudio.client.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+  <Project Path="SigmaStudio.Server/SigmaStudio.Server.csproj" />
+</Solution>

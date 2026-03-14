@@ -1,0 +1,24 @@
+<header class="site-header">
+  <div class="header-container">
+
+    <div class="logo">
+      <a routerLink="/">
+        <span class="logo-text">SigmaStudio</span>
+      </a>
+    </div>
+
+    <nav class="main-nav">
+      <a routerLink="/projects" routerLinkActive="active-link">Проекты</a>
+      <a routerLink="/about" routerLinkActive="active-link">Обо мне</a>
+      <a routerLink="/chat" routerLinkActive="active-link">Чат</a>
+
+      <ng-container *ngIf="authService.hasRole('Admin')">
+        <a routerLink="/admin" routerLinkActive="active-link">Админ-панель</a>
+        <a routerLink="/cloud" routerLinkActive="active-link">Облако</a>
+      </ng-container>
+    </nav>
+
+    <app-user-menu></app-user-menu>
+
+  </div>
+</header>
