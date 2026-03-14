@@ -1,39 +1,50 @@
-import { Injectable } from '@angular/core';
+import { effect, Injectable, signal } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-export type Theme = 'light' | 'dark';
+export type ThemeType = 'light' | 'dark';
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
   private readonly STORAGE_KEY = 'app-theme';
-  private _themeSubject = new BehaviorSubject<Theme>('light');
-  public theme$ = this._themeSubject.asObservable();
+  private _currentTheme = signal<ThemeType>('light');
+
+  public readonly currentTheme = this._currentTheme.asReadonly();
 
   constructor() {
-    // Загружаем тему из localStorage при старте
-    const savedTheme = localStorage.getItem(this.STORAGE_KEY) as Theme;
+    const savedTheme = localStorage.getItem(this.STORAGE_KEY) as ThemeType;
     const initialTheme = savedTheme || 'light';
     this.setTheme(initialTheme);
+
+    effect(() => {
+      const theme = this._currentTheme();
+
+      document.body.classList.remove('light-theme', 'dark-theme');
+
+      document.body.classList.add(`${theme}-theme`);
+
+      localStorage.setItem(this.STORAGE_KEY, theme);
+
+      console.log(`Theme changed to: ${theme}`);
+    });
   }
 
-  getTheme(): Theme {
-    return this._themeSubject.getValue();
-  }
-
-  setTheme(theme: Theme): void {
-    this._themeSubject.next(theme);
-    localStorage.setItem(this.STORAGE_KEY, theme);
-
-    if (theme === 'dark') {
-      document.body.classList.add('dark-theme');
+  setTheme(theme: ThemeType): void {
+    if (this.isValidTheme(theme)) {
+      this._currentTheme.set(theme);
     } else {
-      document.body.classList.remove('dark-theme');
+      console.warn(`Invalid theme: ${theme}`);
     }
   }
 
   toggleTheme(): void {
-    const current = this.getTheme();
-    const newTheme = current === 'light' ? 'dark' : 'light';
-    this.setTheme(newTheme);
+    const current = this._currentTheme();
+    const themes: ThemeType[] = ['light', 'dark'];
+    const currentIndex = themes.indexOf(current);
+    const nextIndex = (currentIndex + 1) % themes.length;
+    this.setTheme(themes[nextIndex]);
+  }
+
+  private isValidTheme(theme: string): theme is ThemeType {
+    return ['light', 'dark', 'pink', 'green'].includes(theme);
   }
 }

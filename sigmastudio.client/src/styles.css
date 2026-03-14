@@ -1,5 +1,9 @@
-/* === СВЕТЛАЯ ТЕМА (по умолчанию) === */
+/* Светлая тема */
 :root {
+  --header-height: 60px;
+}
+
+body.light-theme {
   --bg-primary: #F8FAFC;
   --bg-secondary: #FFFFFF;
   --bg-hover: #F1F5F9;
@@ -15,7 +19,7 @@
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* === ТЁМНАЯ ТЕМА === */
+/* Темная тема */
 body.dark-theme {
   --bg-primary: #0F172A;
   --bg-secondary: #1E293B;

@@ -3,5 +3,5 @@
     <Build />
     <Deploy />
   </Project>
-  <Project Path="SigmaStudio.Server/SigmaStudio.Server.csproj" />
+  <Project Path="SigmaStudio.Server/SigmaStudio.Server.csproj" DisplayName="sigmastudio.server" />
 </Solution>

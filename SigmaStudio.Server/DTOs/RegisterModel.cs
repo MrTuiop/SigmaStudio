@@ -20,8 +20,8 @@ namespace SigmaStudio.Server.DTOs
         [Compare("Password", ErrorMessage = "Пароли не совпадают")]
         public string ConfirmPassword { get; set; }
 
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public DateOnly DateOfBirth { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        public DateOnly? DateOfBirth { get; set; }
     }
 }

@@ -16,10 +16,28 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { authGuard } from './core/guards/auth.guard';
 
 import { ReactiveFormsModule } from '@angular/forms';
-import { HomePage } from './pages/home/home'; // ← Добавь этот импорт
+import { HomePage } from './pages/home/home';
+import { ProjectsPage } from './pages/projects/projects';
+import { AboutPage } from './pages/about/about';
+import { ChatPage } from './pages/chat/chat';
+import { AdminPage } from './pages/admin/admin';
+import { CloudPage } from './pages/cloud/cloud'; // ← Добавь этот импорт
 
 @NgModule({
-  declarations: [App, Header, Footer, UserMenu, LoginComponent, RegisterComponent, HomePage],
+  declarations: [
+    App,
+    Header,
+    Footer,
+    UserMenu,
+    LoginComponent,
+    RegisterComponent,
+    HomePage,
+    ProjectsPage,
+    AboutPage,
+    ChatPage,
+    AdminPage,
+    CloudPage,
+  ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, ReactiveFormsModule],
   providers: [
     provideBrowserGlobalErrorListeners(),

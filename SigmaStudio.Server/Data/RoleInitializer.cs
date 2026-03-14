@@ -6,7 +6,7 @@ namespace SigmaStudio.Server.Data
     {
         public static async Task InitializeAsync(RoleManager<IdentityRole> roleManager)
         {
-            string[] roleNames = { "Admin", "User", "Guest" };
+            string[] roleNames = { "Admin", "User" };
             
             foreach (var roleName in roleNames)
             {
