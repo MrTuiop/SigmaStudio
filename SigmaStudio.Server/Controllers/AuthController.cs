@@ -14,11 +14,11 @@ namespace SigmaStudio.Server.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<ApplicationUserModel> _userManager;
         private readonly IConfiguration _configuration;
         private readonly ILogger<AuthController> _logger;
 
-        public AuthController(UserManager<ApplicationUser> userManager, IConfiguration configuration, ILogger<AuthController> logger)
+        public AuthController(UserManager<ApplicationUserModel> userManager, IConfiguration configuration, ILogger<AuthController> logger)
         {
             _userManager = userManager;
             _configuration = configuration;
@@ -26,9 +26,9 @@ namespace SigmaStudio.Server.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterModel model)
+        public async Task<IActionResult> Register([FromBody] RegisterDto model)
         {
-            var user = new ApplicationUser
+            var user = new ApplicationUserModel
             {
                 UserName = model.UserName,
                 Email = model.Email,
@@ -49,9 +49,9 @@ namespace SigmaStudio.Server.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginModel model)
+        public async Task<IActionResult> Login([FromBody] LoginDto model)
         {
-            ApplicationUser? user = null;
+            ApplicationUserModel? user = null;
 
             if (model.UserNameOrEmail.Contains("@"))
             {
@@ -73,7 +73,7 @@ namespace SigmaStudio.Server.Controllers
             return Unauthorized(new { Message = "Неверный логин или пароль" });
         }
 
-        private async  Task<string> GenerateJwtToken(ApplicationUser user)
+        private async Task<string> GenerateJwtToken(ApplicationUserModel user)
         {
             var jwtSettings = _configuration.GetSection("JwtSettings");
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["JwtKey"]));
@@ -86,7 +86,7 @@ namespace SigmaStudio.Server.Controllers
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim("name", user.UserName)
+                new Claim("userName", user.UserName)
             };
 
             foreach (var role in roles)

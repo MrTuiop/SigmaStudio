@@ -2,7 +2,7 @@
 
 namespace SigmaStudio.Server.DTOs
 {
-    public class LoginModel
+    public class LoginDto
     {
         [Required]
         public string UserNameOrEmail { get; set; }

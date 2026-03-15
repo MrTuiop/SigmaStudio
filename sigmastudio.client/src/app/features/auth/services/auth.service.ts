@@ -36,7 +36,7 @@ export class AuthService {
       const decoded = this.jwtHelper.decodeToken(token);
 
       this._isLoggedIn.set(true);
-      this._userName.set(decoded['name'] || null);
+      this._userName.set(decoded['userName'] || null);
       this._userEmail.set(decoded['email'] || null);
       this._userRoles.set(decoded['role'] || []);
     } else {

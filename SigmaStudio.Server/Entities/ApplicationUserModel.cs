@@ -2,7 +2,7 @@
 
 namespace SigmaStudio.Server.Entities
 {
-    public class ApplicationUser : IdentityUser
+    public class ApplicationUserModel : IdentityUser
     {
         public string? FirstName { get; set; }
         public string? LastName { get; set; }

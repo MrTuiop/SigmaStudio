@@ -2,7 +2,7 @@
 
 namespace SigmaStudio.Server.DTOs
 {
-    public class RegisterModel
+    public class RegisterDto
     {
         [Required]
         [MinLength(3, ErrorMessage = "Логин должен быть не менее 3 символов")]
