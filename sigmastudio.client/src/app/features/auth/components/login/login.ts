@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { ProfileService } from '../../../profile/services/profile.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private profileService: ProfileService
   ) {
     this.loginForm = this.fb.group({
       usernameOrEmail: ['', [Validators.required]],
@@ -37,6 +39,14 @@ export class LoginComponent {
 
     this.authService.login(this.loginForm.value).subscribe({
       next: () => {
+        this.profileService.loadProfile().subscribe({
+          next: () => {
+            console.log("Данные успешно загружены", this.profileService.profile()?.email);
+          },
+          error: (err) => {
+            console.error('Failed to load profile', err);
+          }
+        });
         this.router.navigate(['/']);
       },
       error: (err) => {

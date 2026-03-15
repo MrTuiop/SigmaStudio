@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly apiUrl = 'http://localhost:5292/api/auth'; // Твой API
+  private readonly apiUrl = 'http://localhost:5292/api/auth';
   private readonly tokenKey = 'auth_token';
   private jwtHelper = new JwtHelperService();
 
