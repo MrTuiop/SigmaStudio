@@ -2,20 +2,26 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './features/auth/components/login/login';
 import { RegisterComponent } from './features/auth/components/register/register';
-import { HomePage } from './pages/home/home'
+import { HomePage } from './features/home/home'
 import { authGuard } from './core/guards/auth.guard';
-import { ProjectsPage } from './pages/projects/projects';
-import { AboutPage } from './pages/about/about';
-import { ChatPage } from './pages/chat/chat';
-import { AdminPage } from './pages/admin/admin';
-import { CloudPage } from './pages/cloud/cloud';
+import { ProjectsPage } from './features/projects/projects';
+import { AboutPage } from './features/about/about';
+import { ChatPage } from './features/chat/chat';
+import { AdminPage } from './features/admin/admin';
+import { CloudPage } from './features/cloud/cloud';
 import { roleGuard } from './core/guards/role.guard';
+import { ProfilePage } from './features/profile/profile';
 
 const routes: Routes = [
   { path: '', component: HomePage },
   { path: 'projects', component: ProjectsPage },
   { path: 'about', component: AboutPage },
   { path: 'chat', component: ChatPage },
+  {
+    path: 'profile',
+    component: ProfilePage,
+    canActivate: [authGuard]
+  },
   {
     path: 'admin',
     component: AdminPage,

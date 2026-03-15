@@ -8,10 +8,10 @@
 
   <!-- Выпадающее меню -->
   <div class="dropdown-panel" *ngIf="isMenuOpen" (clickOutside)="closeMenu()">
-    <!-- Если пользователь НЕ вошёл -->
-    <ng-container *ngIf="!authService.isLoggedIn()">
-      <div class="menu-section">
-        <p class="user-text">Добро пожаловать! Гость</p>
+
+    <div class="menu-section">
+      <p class="user-text">Добро пожаловать! {{ authService.userName() || 'Guest' }}</p>
+      <ng-container *ngIf="!authService.isLoggedIn()">
         <a routerLink="/login" class="menu-item" (click)="closeMenu()">
           <span class="icon">🔐</span>
           <span>Войти</span>
@@ -20,30 +20,31 @@
           <span class="icon">📝</span>
           <span>Регистрация</span>
         </a>
-      </div>
-    </ng-container>
+      </ng-container>
 
-    <!-- Если пользователь вошёл -->
-    <ng-container *ngIf="authService.isLoggedIn()">
-      <div class="menu-section">
-        <p class="user-text">Добро пожаловать! {{authService.userName()}}</p>
+      <ng-container *ngIf="authService.isLoggedIn()">
         <a routerLink="/profile" class="menu-item" (click)="closeMenu()">
           <span class="icon">👤</span>
           <span>Профиль</span>
         </a>
-        <a routerLink="/settings" class="menu-item" (click)="closeMenu()">
-          <span class="icon">⚙️</span>
-          <span>Настройки</span>
-        </a>
-      </div>
+      </ng-container>
+    </div>
 
+    <div class="menu-divider"></div>
+
+    <div class="menu-section">
+      <button (click)="toggleTheme()" class="menu-item">
+        <span>{{ 'Выбрать тему' }}</span>
+      </button>
+      <button class="menu-item">
+        <span class="icon">{{ 'Выбрать язык' }}</span>
+      </button>
+    </div>
+
+    <ng-container *ngIf="authService.isLoggedIn()">
       <div class="menu-divider"></div>
 
       <div class="menu-section">
-        <button (click)="toggleTheme()" class="menu-item">
-          <span class="icon">{{ isDarkTheme ? '☀️' : '🌙' }}</span>
-          <span>{{ isDarkTheme ? 'Светлая тема' : 'Тёмная тема' }}</span>
-        </button>
         <button (click)="logout()" class="menu-item logout">
           <span class="icon">🚪</span>
           <span>Выйти</span>

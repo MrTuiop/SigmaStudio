@@ -5,6 +5,7 @@ import { LoginModel } from '../models/login.model';
 import { RegisterModel } from '../models/register.model';
 import { AuthResponse } from '../models/auth-response.model';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class AuthService {
   public readonly userEmail = this._userEmail.asReadonly();
   public readonly userRoles = this._userRoles.asReadonly();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.updateAuthState();
   }
 
@@ -64,6 +65,7 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem(this.tokenKey);
     this.updateAuthState();
+    this.router.navigate(['/']);
   }
 
   private setToken(token: string): void {

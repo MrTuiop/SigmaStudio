@@ -16,12 +16,13 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { authGuard } from './core/guards/auth.guard';
 
 import { ReactiveFormsModule } from '@angular/forms';
-import { HomePage } from './pages/home/home';
-import { ProjectsPage } from './pages/projects/projects';
-import { AboutPage } from './pages/about/about';
-import { ChatPage } from './pages/chat/chat';
-import { AdminPage } from './pages/admin/admin';
-import { CloudPage } from './pages/cloud/cloud'; // ← Добавь этот импорт
+import { HomePage } from './features/home/home';
+import { ProjectsPage } from './features/projects/projects';
+import { AboutPage } from './features/about/about';
+import { ChatPage } from './features/chat/chat';
+import { AdminPage } from './features/admin/admin';
+import { CloudPage } from './features/cloud/cloud';
+import { ProfilePage } from './features/profile/profile'; // ← Добавь этот импорт
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { CloudPage } from './pages/cloud/cloud'; // ← Добавь этот и
     ChatPage,
     AdminPage,
     CloudPage,
+    ProfilePage,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, ReactiveFormsModule],
   providers: [
