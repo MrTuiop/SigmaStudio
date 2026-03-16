@@ -43,7 +43,7 @@ namespace SigmaStudio.Server.Controllers
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 DateOfBirth = user.DateOfBirth,
-                IconPath = user.IconPath
+                AvatarUrl = user.AvatarUrl
             };
 
             return Ok(profile);

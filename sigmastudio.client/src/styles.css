@@ -4,19 +4,21 @@
 }
 
 body.light-theme {
-  --bg-primary: #F8FAFC;
-  --bg-secondary: #FFFFFF;
-  --bg-hover: #F1F5F9;
-  --text-primary: #1E293B;
-  --text-secondary: #64748B;
-  --primary: #3B82F6;
-  --primary-hover: #2563EB;
-  --primary-light: #DBEAFE;
-  --border: #E2E8F0;
-  --admin: #D97706;
-  --admin-bg: #FEF3C7;
+  --bg-primary: #F8FAFC; /* Основной фон страницы */
+  --bg-secondary: #FFFFFF; /* Фон хедера, карточек */
+  --bg-hover: #F1F5F9; /* Фон при наведении */
+  --text-primary: #1E293B; /* Заголовки */
+  --text-secondary: #64748B; /* Основной текст */
+  --primary: #3B82F6; /* Кнопки, ссылки */
+  --primary-hover: #2563EB; /* Наведение на акцент */
+  --primary-light: #DBEAFE; /* Светлый фон акцента */
+  --border: #E2E8F0; /* Разделители */
+  --danger: #DC2626; /* Яркий красный (как EF4444, но чуть глубже) */
+  --danger-hover: #B91C1C; /* Темнее при наведении */
+  --danger-bg: #FEF2F2; /* Очень бледный красный фон */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
 }
 
 /* Темная тема */
@@ -30,21 +32,74 @@ body.dark-theme {
   --primary-hover: #3B82F6;
   --primary-light: #1E3A5F;
   --border: #334155;
-  --admin: #FBBF24;
-  --admin-bg: #422006;
+  --danger: #EF4444; /* Чуть ярче для контраста на темном */
+  --danger-hover: #F87171; /* Светлее при наведении */
+  --danger-bg: #450A0A;
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
 }
 
-/* === Глобальные стили === */
+/* ===== ГЛОБАЛЬНЫЙ ШРИФТ ===== */
+* {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: var(--bg-primary);
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
   color: var(--text-primary);
+  background: var(--bg-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-* {
-  box-sizing: border-box;
+/* Заголовки */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+/* Кнопки */
+button, .btn {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* Ссылки */
+a {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
+
+/* Input поля */
+input, textarea, select {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
 }

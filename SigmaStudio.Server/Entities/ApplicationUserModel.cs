@@ -7,6 +7,6 @@ namespace SigmaStudio.Server.Entities
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public DateOnly? DateOfBirth { get; set; }
-        public string? IconPath { get; set; }
+        public string? AvatarUrl { get; set; }
     }
 }

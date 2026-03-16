@@ -22,7 +22,8 @@ import { AboutPage } from './features/about/about';
 import { ChatPage } from './features/chat/chat';
 import { AdminPage } from './features/admin/admin';
 import { CloudPage } from './features/cloud/cloud';
-import { ProfilePage } from './features/profile/profile'; // ← Добавь этот импорт
+import { ProfilePage } from './features/profile/profile';
+import { LucideAngularModule, User, LogIn, UserPlus, Settings, Moon, Sun, Globe, LogOut, Home, Folder, Info, MessageCircle, Send, Github, Mail, Palette } from 'lucide-angular';
 
 @NgModule({
   declarations: [
@@ -40,10 +41,12 @@ import { ProfilePage } from './features/profile/profile'; // ← Добавь э
     CloudPage,
     ProfilePage,
   ],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule, ReactiveFormsModule],
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule, ReactiveFormsModule, LucideAngularModule.pick({
+    User, LogIn, UserPlus, Settings, Moon, Sun, Globe, LogOut,
+    Home, Folder, Info, MessageCircle, Send, Github, Mail, Palette
+  })],
   providers: [
     provideBrowserGlobalErrorListeners(),
-    // authGuard,  ← ❌ УДАЛИ ЭТУ СТРОКУ! Функциональные гарды не регистрируются здесь
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

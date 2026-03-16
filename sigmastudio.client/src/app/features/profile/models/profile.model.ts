@@ -6,5 +6,5 @@ export interface ProfileModel {
   firstName: string | null;
   lastName: string | null;
   dateOfBirth: string | null;
-  iconPath: string | null;
+  avatarUrl: string | null;
 }

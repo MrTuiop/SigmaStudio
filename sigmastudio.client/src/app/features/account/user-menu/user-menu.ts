@@ -2,6 +2,7 @@ import { Component, HostListener } from '@angular/core';
 import { AuthService } from '../../auth/services/auth.service'
 import { authGuard } from '../../../core/guards/auth.guard';
 import { ThemeService } from '../../../core/services/theme'
+import { ProfileService } from '../../profile/services/profile.service';
 
 @Component({
   selector: 'app-user-menu',
@@ -14,7 +15,14 @@ export class UserMenu {
   isDarkTheme = false;
   isMenuOpen = false;
 
-  constructor(public authService: AuthService, public themeService: ThemeService) { }
+  defaultAvatarUrl = "assets/default-avatar.png";
+
+  constructor(public authService: AuthService, public themeService: ThemeService, public profileService: ProfileService) {}
+
+  get userAvatarUrl(): string {
+    const path = this.profileService.profile()?.avatarUrl;
+    return path && this.authService.isLoggedIn() ? path : this.defaultAvatarUrl;
+  }
 
   ngOnInit(): void {
   }
@@ -33,6 +41,7 @@ export class UserMenu {
 
   logout(): void {
     this.authService.logout();
+    this.closeMenu();
   }
 
   @HostListener('document:click', ['$event'])

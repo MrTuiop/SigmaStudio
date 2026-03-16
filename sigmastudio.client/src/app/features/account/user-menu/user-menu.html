@@ -2,29 +2,39 @@
 
   <!-- Кнопка -->
   <button (click)="toggleMenu()" class="avatar-btn" title="Профиль">
-    <span class="avatar-icon">👤</span>
-    <span class="dropdown-arrow" [class.open]="isMenuOpen">▼</span>
+
+    <!-- Если пользователь вошел и есть аватарка -->
+    <img [src]="userAvatarUrl" alt="Avatar" class="avatar-image" />
+
+    <!-- Индикатор статуса (опционально) -->
+    <span class="status-indicator" *ngIf="authService.isLoggedIn()"></span>
   </button>
 
   <!-- Выпадающее меню -->
   <div class="dropdown-panel" *ngIf="isMenuOpen" (clickOutside)="closeMenu()">
 
+    <div class="menu-section user-info-section">
+      <div class="user-details">
+        <p class="user-text">Добро пожаловать!</p>
+        <p class="user-name">{{ authService.userName() || 'Пользователь' }}</p>
+        <p class="user-email">{{ authService.userEmail() || '' }}</p>
+       </div>
+    </div>
     <div class="menu-section">
-      <p class="user-text">Добро пожаловать! {{ authService.userName() || 'Guest' }}</p>
       <ng-container *ngIf="!authService.isLoggedIn()">
         <a routerLink="/login" class="menu-item" (click)="closeMenu()">
-          <span class="icon">🔐</span>
+          <lucide-icon name="log-in" size="18"></lucide-icon>
           <span>Войти</span>
         </a>
         <a routerLink="/register" class="menu-item" (click)="closeMenu()">
-          <span class="icon">📝</span>
+          <lucide-icon name="user-plus" size="18"></lucide-icon>
           <span>Регистрация</span>
         </a>
       </ng-container>
 
       <ng-container *ngIf="authService.isLoggedIn()">
         <a routerLink="/profile" class="menu-item" (click)="closeMenu()">
-          <span class="icon">👤</span>
+          <lucide-icon name="user" size="20"></lucide-icon>
           <span>Профиль</span>
         </a>
       </ng-container>
@@ -34,10 +44,12 @@
 
     <div class="menu-section">
       <button (click)="toggleTheme()" class="menu-item">
+        <lucide-icon name="palette" size="18"></lucide-icon>
         <span>{{ 'Выбрать тему' }}</span>
       </button>
       <button class="menu-item">
-        <span class="icon">{{ 'Выбрать язык' }}</span>
+        <lucide-icon name="globe" size="18"></lucide-icon>
+        <span>{{ 'Выбрать язык' }}</span>
       </button>
     </div>
 
@@ -46,7 +58,7 @@
 
       <div class="menu-section">
         <button (click)="logout()" class="menu-item logout">
-          <span class="icon">🚪</span>
+          <lucide-icon name="log-out" size="18"></lucide-icon>
           <span>Выйти</span>
         </button>
       </div>

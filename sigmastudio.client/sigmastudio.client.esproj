@@ -9,6 +9,5 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="src\app\features\profile\services\" />
-    <Folder Include="src\assets\" />
   </ItemGroup>
 </Project>
