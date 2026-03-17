@@ -1,6 +1,6 @@
 /* Светлая тема */
 :root {
-  --header-height: 60px;
+  --header-height: 80px;
 }
 
 body.light-theme {
@@ -47,6 +47,7 @@ body.dark-theme {
 
 body {
   margin: 0;
+  padding: 0;
   font-family: 'Inter', sans-serif;
   font-weight: 400;
   line-height: 1.6;

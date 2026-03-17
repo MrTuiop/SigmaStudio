@@ -4,7 +4,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: var(--header-height);
+  height: auto;
   background: var(--bg-secondary);
   border-bottom: 1px solid var(--border);
   box-shadow: var(--shadow-sm);
@@ -15,13 +15,25 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
-  height: 100%;
+  height: var(--header-height);
+  display: grid;
+  grid-template-columns: 1fr min-content 1fr;
+  align-items: center;
+}
+
+app-user-menu {
+  justify-self: end;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  height: 100%;
+  margin: 0;
 }
 
 /* Логотип */
+.logo {
+  justify-self: start;
+}
+
 .logo a {
   text-decoration: none;
   color: var(--text-primary);
@@ -31,14 +43,15 @@
 }
 
 /* Навигация */
-.main-nav {
+.header-main-nav {
+  justify-self: center;
   display: flex;
   gap: 0;
   height: 100%;
   align-items: center;
 }
 
-  .main-nav a {
+  .header-main-nav a {
     color: var(--text-secondary);
     text-decoration: none;
     font-weight: 500;
@@ -47,9 +60,10 @@
     display: flex;
     align-items: center;
     padding: 0 1.5rem;
+    white-space: nowrap;
   }
 
-    .main-nav a:hover {
+    .header-main-nav a:hover {
       background: var(--bg-hover);
       color: var(--primary);
     }
@@ -58,4 +72,49 @@
 .active-link {
   color: var(--primary);
   border-bottom: 3px solid var(--primary);
+}
+
+/* Стили для верхней узкой панели */
+.header-top-bar {
+  background-color: var(--bg-primary); /* Светло-серый фон, можно изменить */
+  border-bottom: 1px solid var(--border);
+  font-size: 12px; /* Узкий/мелкий текст */
+  padding: 5px 0;
+}
+
+.header-top-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: center; /* Ссылки справа (или по центру) */
+}
+
+.header-top-nav {
+  display: flex;
+  gap: 15px; /* Расстояние между ссылками */
+  align-items: center;
+}
+
+  .header-top-nav a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    transition: color 0.3s;
+  }
+
+    .header-top-nav a:hover {
+      color: var(--primary);
+    }
+
+/* Активный класс для верхнего меню (если нужен) */
+.active-link-small {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* Адаптивность: скрываем верхнюю панель на мобильных, чтобы не занимала место */
+@media (max-width: 768px) {
+  .header-top-bar {
+    display: none;
+  }
 }

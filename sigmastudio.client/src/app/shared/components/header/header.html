@@ -1,4 +1,20 @@
 <header class="site-header">
+
+  <!-- Верхняя панель -->
+  <div class="header-top-bar">
+    <div class="header-top-container">
+      <nav class="header-top-nav">
+        <a routerLink="/projects" routerLinkActive="active-link-small">Проекты</a>
+        <a routerLink="/about" routerLinkActive="active-link-small">Обо мне</a>
+        <a routerLink="/chat" routerLinkActive="active-link-small">Чат</a>
+        <ng-container *ngIf="authService.hasRole('Admin')">
+          <a routerLink="/admin" routerLinkActive="active-link-small">Админ-панель</a>
+          <a routerLink="/cloud" routerLinkActive="active-link-small">Облако</a>
+        </ng-container>
+      </nav>
+    </div>
+  </div>
+
   <div class="header-container">
 
     <div class="logo">
@@ -7,7 +23,7 @@
       </a>
     </div>
 
-    <nav class="main-nav">
+    <nav class="header-main-nav">
       <a routerLink="/projects" routerLinkActive="active-link">Проекты</a>
       <a routerLink="/about" routerLinkActive="active-link">Обо мне</a>
       <a routerLink="/chat" routerLinkActive="active-link">Чат</a>
