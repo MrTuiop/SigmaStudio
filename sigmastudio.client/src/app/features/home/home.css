@@ -124,19 +124,6 @@
   position: relative;
   display: inline-block;
   transition: text-shadow 0.3s ease, filter 0.3s ease;
-}
-
-/* Градиент для тёмной темы */
-body.dark-theme .letter {
-  background: linear-gradient(180deg, #8a2be2, #4169e1);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  text-shadow: 0 0 30px rgba(138, 43, 226, 0.5);
-}
-
-/* Градиент для светлой темы */
-body.light-theme .letter {
   background: linear-gradient(180deg, var(--primary), var(--primary-hover));
   -webkit-background-clip: text;
   background-clip: text;
@@ -162,7 +149,6 @@ body.light-theme .letter {
   }
 }
 
-/* Активная буква — поворот сразу */
 .letter.active {
   transform: scale(1.2) translateY(-10px) rotate(5deg);
   filter: brightness(1.4);
