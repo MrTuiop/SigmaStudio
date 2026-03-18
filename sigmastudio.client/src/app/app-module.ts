@@ -6,14 +6,12 @@ import { AppRoutingModule } from './app-routing-module'; // ← Проверь �
 import { App } from './app';
 import { Header } from './shared/components/header/header';
 import { Footer } from './shared/components/footer/footer';
-import { UserMenu } from './features/account/user-menu/user-menu';
+import { UserMenu } from './shared/components/user-menu/user-menu';
 import { LoginComponent } from './features/auth/components/login/login';
 import { RegisterComponent } from './features/auth/components/register/register';
 
 // Интерцептор
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
-// Гард импортируем для использования в маршрутах, но НЕ в providers
-import { authGuard } from './core/guards/auth.guard';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { HomePage } from './features/home/home';
