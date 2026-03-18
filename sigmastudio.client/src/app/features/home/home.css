@@ -1,0 +1,179 @@
+.home-container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  transition: background 0.3s ease;
+}
+
+.particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: var(--primary);
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: float 6s infinite ease-in-out;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.3;
+  }
+
+  50% {
+    transform: translateY(-30px) translateX(15px);
+    opacity: 0.8;
+  }
+}
+
+.geometric-shapes {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.shape {
+  position: absolute;
+  opacity: 0.1;
+  border: 2px solid var(--primary);
+}
+
+.triangle {
+  width: 100px;
+  height: 100px;
+  top: 20%;
+  left: 15%;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  background: var(--primary-light);
+  animation: rotate 20s linear infinite;
+}
+
+.hexagon {
+  width: 80px;
+  height: 80px;
+  top: 60%;
+  right: 20%;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  background: var(--primary-light);
+  animation: rotate 25s linear infinite reverse;
+}
+
+.circle {
+  width: 150px;
+  height: 150px;
+  bottom: 15%;
+  left: 25%;
+  border-radius: 50%;
+  border: 2px solid var(--primary);
+  background: transparent;
+  animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.1;
+  }
+
+  50% {
+    transform: scale(1.1);
+    opacity: 0.2;
+  }
+}
+
+.text-container {
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+  perspective: 1000px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.letter {
+  font-size: 5rem;
+  font-weight: 900;
+  font-family: 'Orbitron', sans-serif;
+  color: var(--text-primary);
+  cursor: default;
+  position: relative;
+  display: inline-block;
+  transition: text-shadow 0.3s ease, filter 0.3s ease;
+}
+
+/* Градиент для тёмной темы */
+body.dark-theme .letter {
+  background: linear-gradient(180deg, #8a2be2, #4169e1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 30px rgba(138, 43, 226, 0.5);
+}
+
+/* Градиент для светлой темы */
+body.light-theme .letter {
+  background: linear-gradient(180deg, var(--primary), var(--primary-hover));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 2px 10px rgba(59, 130, 246, 0.3);
+}
+
+.letter.wave {
+  animation: waveJump 0.6s ease-in-out;
+}
+
+@keyframes waveJump {
+  0% {
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-15px) scale(1.15) rotate(0deg);
+  }
+
+  100% {
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+}
+
+/* Активная буква — поворот сразу */
+.letter.active {
+  transform: scale(1.2) translateY(-10px) rotate(5deg);
+  filter: brightness(1.4);
+  transition: text-shadow 0.3s ease, filter 0.3s ease;
+}
+
+body.dark-theme .letter.active {
+  text-shadow: 0 0 50px rgba(96, 165, 250, 0.9);
+}
+
+body.light-theme .letter.active {
+  text-shadow: 0 4px 30px rgba(37, 99, 235, 0.8);
+}
+

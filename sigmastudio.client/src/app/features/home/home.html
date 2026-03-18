@@ -1,3 +1,29 @@
-<h1 id="tableLabel">Weather forecast</h1>
+<div class="home-container">
+  <!-- Фоновые частицы -->
+  <div class="particles">
+    <div *ngFor="let p of particles"
+         class="particle"
+         [style.left.%]="p.left"
+         [style.top.%]="p.top"
+         [style.animationDelay]="p.delay + 's'">
+    </div>
+  </div>
 
-<p>This component demonstrates fetching data from the server.</p>
+  <!-- Геометрические фигуры -->
+  <div class="geometric-shapes">
+    <div class="shape triangle"></div>
+    <div class="shape hexagon"></div>
+    <div class="shape circle"></div>
+  </div>
+
+  <!-- Интерактивный текст -->
+  <div class="text-container"
+       (mouseenter)="onWordEnter()"
+       (mouseleave)="onWordLeave()">
+    <span *ngFor="let letter of letters; let i = index"
+          class="letter"
+          (mouseenter)="hoverLetter(i)">
+      {{ letter }}
+    </span>
+  </div>
+</div>
