@@ -1,6 +1,5 @@
 import { Component, HostListener } from '@angular/core';
 import { AuthService } from '../../../features/auth/services/auth.service'
-import { authGuard } from '../../../core/guards/auth.guard';
 import { ThemeService } from '../../../core/services/theme'
 import { ProfileService } from '../../../features/profile/services/profile.service';
 

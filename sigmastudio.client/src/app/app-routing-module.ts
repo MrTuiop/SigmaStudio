@@ -11,11 +11,12 @@ import { AdminPage } from './features/admin/admin';
 import { CloudPage } from './features/cloud/cloud';
 import { roleGuard } from './core/guards/role.guard';
 import { ProfilePage } from './features/profile/profile';
+import { AdminDashboardPage } from './features/admin/dashboard/dashboard';
+import { AdminUsersPage } from './features/admin/users/users';
 
 const routes: Routes = [
   { path: '', component: HomePage },
   { path: 'projects', component: ProjectsPage },
-  { path: 'about', component: AboutPage },
   { path: 'chat', component: ChatPage },
   {
     path: 'profile',
@@ -24,7 +25,11 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    component: AdminPage,
+    children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'dashboard', component: AdminDashboardPage },
+      { path: 'users', component: AdminUsersPage }
+    ],
     canActivate:[roleGuard(['Admin'])]
   },
   {

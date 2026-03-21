@@ -21,7 +21,28 @@ import { ChatPage } from './features/chat/chat';
 import { AdminPage } from './features/admin/admin';
 import { CloudPage } from './features/cloud/cloud';
 import { ProfilePage } from './features/profile/profile';
-import { LucideAngularModule, User, LogIn, UserPlus, Settings, Moon, Sun, Globe, LogOut, Home, Folder, Info, MessageCircle, Send, Github, Mail, Palette } from 'lucide-angular';
+import {
+  LucideAngularModule,
+  User,
+  LogIn,
+  UserPlus,
+  Settings,
+  Moon,
+  Sun,
+  Globe,
+  LogOut,
+  Home,
+  Folder,
+  Info,
+  MessageCircle,
+  Send,
+  Github,
+  Mail,
+  Palette,
+  ArrowLeft
+} from 'lucide-angular';
+import { AdminDashboardPage } from './features/admin/dashboard/dashboard';
+import { AdminUsersPage } from './features/admin/users/users';
 
 @NgModule({
   declarations: [
@@ -38,11 +59,34 @@ import { LucideAngularModule, User, LogIn, UserPlus, Settings, Moon, Sun, Globe,
     AdminPage,
     CloudPage,
     ProfilePage,
+    AdminDashboardPage,
+    AdminUsersPage,
   ],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule, ReactiveFormsModule, LucideAngularModule.pick({
-    User, LogIn, UserPlus, Settings, Moon, Sun, Globe, LogOut,
-    Home, Folder, Info, MessageCircle, Send, Github, Mail, Palette
-  })],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    LucideAngularModule.pick({
+      User,
+      LogIn,
+      UserPlus,
+      Settings,
+      Moon,
+      Sun,
+      Globe,
+      LogOut,
+      Home,
+      Folder,
+      Info,
+      MessageCircle,
+      Send,
+      Github,
+      Mail,
+      Palette,
+      ArrowLeft
+    }),
+  ],
   providers: [
     provideBrowserGlobalErrorListeners(),
     {

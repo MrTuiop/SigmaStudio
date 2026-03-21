@@ -5,7 +5,7 @@
     <div class="header-top-container">
       <nav class="header-top-nav">
         <a routerLink="/projects" routerLinkActive="active-link-small">Проекты</a>
-        <a routerLink="/about" routerLinkActive="active-link-small">Обо мне</a>
+        <!--<a routerLink="/about" routerLinkActive="active-link-small">Обо мне</a>-->
         <a routerLink="/chat" routerLinkActive="active-link-small">Чат</a>
         <ng-container *ngIf="authService.hasRole('Admin')">
           <a routerLink="/admin" routerLinkActive="active-link-small">Админ-панель</a>
@@ -23,14 +23,35 @@
       </a>
     </div>
 
-    <nav class="header-main-nav">
+    <nav class="header-main-nav" *ngIf="!isInSection">
       <a routerLink="/projects" routerLinkActive="active-link">Проекты</a>
-      <a routerLink="/about" routerLinkActive="active-link">Обо мне</a>
+      <!--<a routerLink="/about" routerLinkActive="active-link">Обо мне</a>-->
       <a routerLink="/chat" routerLinkActive="active-link">Чат</a>
 
       <ng-container *ngIf="authService.hasRole('Admin')">
         <a routerLink="/admin" routerLinkActive="active-link">Админ-панель</a>
         <a routerLink="/cloud" routerLinkActive="active-link">Облако</a>
+      </ng-container>
+    </nav>
+
+    <nav class="header-main-nav" *ngIf="isInSection">
+      <!-- Кнопка НАЗАД -->
+      <a routerLink="/">
+        <lucide-icon name="arrow-left" class="test2"></lucide-icon>
+        <span>&nbsp; Назад</span>
+      </a>
+
+      <!-- Ссылки для Админки -->
+      <ng-container *ngIf="currentSection === '/admin'">
+        <a routerLink="/admin/dashboard" routerLinkActive="active-link">Главная</a>
+        <a routerLink="/admin/users" routerLinkActive="active-link">Пользователи</a>
+        <a routerLink="/admin/settings" routerLinkActive="active-link">Настройки</a>
+      </ng-container>
+
+      <!-- Ссылки для Облака -->
+      <ng-container *ngIf="currentSection === '/profile'">
+        <a routerLink="/profile/account" routerLinkActive="active-link">Аккаунт</a>
+        <a routerLink="/profile/security" routerLinkActive="active-link">Безопасность</a>
       </ng-container>
     </nav>
 
