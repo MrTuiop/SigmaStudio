@@ -1,0 +1,186 @@
+/* Контейнер на всю страницу */
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-primary);
+  padding: 2rem;
+}
+
+/* Карточка формы */
+.auth-card {
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 420px;
+  border: 1px solid var(--border);
+}
+
+.auth-title {
+  margin: 0 0 1.5rem 0;
+  color: var(--text-primary);
+  font-size: 1.75rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Группы полей */
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+
+/* Поля ввода */
+.form-control {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  box-sizing: border-box;
+}
+
+  .form-control:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-light);
+  }
+
+  /* Состояния валидации */
+  .form-control.is-invalid {
+    border-color: var(--danger);
+  }
+
+    .form-control.is-invalid:focus {
+      box-shadow: 0 0 0 3px var(--danger-bg);
+    }
+
+.invalid-feedback {
+  color: var(--danger);
+  font-size: 0.85rem;
+  margin-top: 0.4rem;
+  display: block;
+}
+
+/* Сообщение об ошибке (общее) */
+.alert {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.25rem;
+  font-size: 0.95rem;
+}
+
+.alert-danger {
+  background: var(--danger-bg);
+  color: var(--danger);
+  border: 1px solid var(--danger);
+}
+
+/* Кнопка */
+.btn {
+  width: 100%;
+  padding: 0.875rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.1s;
+}
+
+  .btn:active {
+    transform: scale(0.98);
+  }
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+  .btn-primary:hover:not(:disabled) {
+    background: var(--primary-hover);
+  }
+
+.btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Подвал формы */
+.auth-footer {
+  margin-top: 1.5rem;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+  .auth-footer a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+    .auth-footer a:hover {
+      text-decoration: underline;
+    }
+
+/* Адаптивность для мобильных */
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 1.5rem;
+  }
+
+  .auth-title {
+    font-size: 1.5rem;
+  }
+}
+
+/* Контейнер для поля пароля */
+.password-input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+  /* Само поле ввода */
+  .password-input-group .form-control {
+    padding-right: 40px; /* Место для иконки справа */
+  }
+
+/* Кнопка с иконкой глаза */
+.password-toggle-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6c757d; /* Цвет иконки */
+  z-index: 10;
+}
+
+  .password-toggle-btn:hover {
+    color: #333; /* Цвет при наведении */
+  }
+
+  .password-toggle-btn:focus {
+    outline: none;
+  }
