@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { AuthService } from '../../../features/auth/services/auth.service'
 import { ThemeService } from '../../../core/services/theme'
 import { ProfileService } from '../../../features/profile/services/profile.service';
@@ -9,18 +9,28 @@ import { ProfileService } from '../../../features/profile/services/profile.servi
   templateUrl: './user-menu.html',
   styleUrl: './user-menu.css',
 })
-export class UserMenu {
+export class UserMenu implements OnInit {
   isLoggedIn = false;
   isDarkTheme = false;
   isMenuOpen = false;
 
   defaultAvatarUrl = "assets/default-avatar.png";
 
-  constructor(public authService: AuthService, public themeService: ThemeService, public profileService: ProfileService) {}
+  constructor(public authService: AuthService, public themeService: ThemeService, public profileService: ProfileService) { }
+
+ 
 
   get userAvatarUrl(): string {
     const path = this.profileService.profile()?.avatarUrl;
     return path && this.authService.isLoggedIn() ? path : this.defaultAvatarUrl;
+  }
+
+  get displayUserName(): string {
+    return this.profileService.profile()?.userName || 'Пользователь';
+  }
+
+  get displayUserEmail(): string {
+    return this.profileService.profile()?.email || '';
   }
 
   ngOnInit(): void {

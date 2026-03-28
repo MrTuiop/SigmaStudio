@@ -1,0 +1,201 @@
+.profile-container {
+  max-width: 650px;
+  margin: 40px auto;
+  padding: 25px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+}
+
+/* Аватарка */
+.avatar-section {
+  text-align: center;
+  margin-bottom: 35px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #eee;
+}
+
+.avatar-wrapper {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 15px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid #f0f0f0;
+  transition: border-color 0.3s;
+}
+
+  .avatar-wrapper:hover {
+    border-color: #0d6efd;
+  }
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(13, 110, 253, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.avatar-wrapper:hover .avatar-overlay {
+  opacity: 1;
+}
+
+.avatar-hint {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0;
+}
+
+/* Строки с данными */
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+  .info-row:last-child {
+    border-bottom: none;
+  }
+
+.label {
+  font-weight: 600;
+  color: #333;
+  min-width: 140px;
+  font-size: 0.95rem;
+}
+
+.value-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.value {
+  color: #444;
+  font-size: 1rem;
+  word-break: break-word;
+  text-align: right;
+}
+
+.edit-input {
+  padding: 8px 12px;
+  border: 2px solid #0d6efd;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: box-shadow 0.2s;
+  width: 220px;
+  text-align: right;
+}
+
+  .edit-input:focus {
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
+  }
+
+/* Кнопки */
+.icon-btn {
+  background: none;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  color: #555;
+}
+
+  .icon-btn:hover {
+    background: #f0f0f0;
+    transform: scale(1.05);
+  }
+
+.edit-btn:hover {
+  color: #0d6efd;
+}
+
+.save-btn {
+  color: #198754;
+}
+
+  .save-btn:hover {
+    background: #d1e7dd;
+  }
+
+.cancel-btn {
+  color: #dc3545;
+}
+
+  .cancel-btn:hover {
+    background: #f8d7da;
+  }
+
+/* Загрузка */
+.profile-loading {
+  text-align: center;
+  padding: 50px 20px;
+  color: #666;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #0d6efd;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Адаптив */
+@media (max-width: 576px) {
+  .info-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .label {
+    min-width: auto;
+  }
+
+  .value-wrapper {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .edit-input {
+    width: 100%;
+    text-align: left;
+  }
+}

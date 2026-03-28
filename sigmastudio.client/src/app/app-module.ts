@@ -20,7 +20,6 @@ import { AboutPage } from './features/about/about';
 import { ChatPage } from './features/chat/chat';
 import { AdminPage } from './features/admin/admin';
 import { CloudPage } from './features/cloud/cloud';
-import { ProfilePage } from './features/profile/profile';
 import {
   LucideAngularModule,
   User,
@@ -39,10 +38,15 @@ import {
   Github,
   Mail,
   Palette,
-  ArrowLeft
+  ArrowLeft,
+  Pencil,
+  Save,
+  X,
 } from 'lucide-angular';
 import { AdminDashboardPage } from './features/admin/dashboard/dashboard';
 import { AdminUsersPage } from './features/admin/users/users';
+import { ProfileDashboardPage } from './features/profile/dashboard/dashboard';
+import { ProfileSecurityPage } from './features/profile/security/security';
 
 @NgModule({
   declarations: [
@@ -58,9 +62,10 @@ import { AdminUsersPage } from './features/admin/users/users';
     ChatPage,
     AdminPage,
     CloudPage,
-    ProfilePage,
     AdminDashboardPage,
     AdminUsersPage,
+    ProfileDashboardPage,
+    ProfileSecurityPage,
   ],
   imports: [
     BrowserModule,
@@ -84,7 +89,10 @@ import { AdminUsersPage } from './features/admin/users/users';
       Github,
       Mail,
       Palette,
-      ArrowLeft
+      ArrowLeft,
+      Pencil,
+      Save,
+      X,
     }),
   ],
   providers: [

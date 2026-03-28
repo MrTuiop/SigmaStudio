@@ -1,0 +1,72 @@
+<div class="profile-container" *ngIf="profile(); else loading">
+
+  <!-- 🔹 Аватарка с оверлеем -->
+  <div class="avatar-section">
+    <div class="avatar-wrapper">
+      <img [src]="userAvatarUrl"
+           alt="Аватар"
+           class="avatar-img">
+
+      <!-- Оверлей при наведении -->
+      <label for="avatarInput" class="avatar-overlay" title="Изменить аватарку">
+        <i class="bi bi-camera-fill"></i>
+      </label>
+      <input type="file"
+             id="avatarInput"
+             hidden
+             accept="image/*"
+             (change)="editAvatar($event)">
+    </div>
+    <p class="avatar-hint">Нажмите на аватарку, чтобы изменить</p>
+  </div>
+
+  <!-- 🔹 Информация о пользователе -->
+  <div class="info-section">
+    <div *ngFor="let field of editableFields"
+         class="info-row">
+
+      <span class="label">{{ field.label }}:</span>
+
+      <div class="value-wrapper">
+        <!-- Режим просмотра -->
+        <span *ngIf="editingField() !== field.key" class="value">
+          {{ field.key === 'dateOfBirth' ? formatDate(profile()?.[field.key]) : profile()?.[field.key] }}
+        </span>
+
+        <!-- Режим редактирования -->
+        <input *ngIf="editingField() === field.key"
+               [type]="field.type"
+               [value]="tempValue()"
+               (input)="tempValue.set($event.target.value)"
+               class="edit-input"
+               autofocus>
+
+        <!-- Кнопки действий -->
+        <ng-container *ngIf="editingField() !== field.key">
+          <button class="icon-btn edit-btn"
+                  (click)="startEdit(field.key)"
+                  title="Редактировать">
+            <lucide-icon name="pencil" size="18"></lucide-icon>
+          </button>
+        </ng-container>
+
+        <ng-container *ngIf="editingField() === field.key">
+          <button class="icon-btn save-btn" (click)="saveField()" title="Сохранить">
+            <lucide-icon name="save" size="18"></lucide-icon>
+          </button>
+          <button class="icon-btn cancel-btn" (click)="cancelEdit()" title="Отмена">
+            <lucide-icon name="x" size="18"></lucide-icon>
+          </button>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 🔹 Заглушка загрузки -->
+<ng-template #loading>
+  <div class="profile-loading">
+    <div class="spinner"></div>
+    <p>Загрузка профиля...</p>
+  </div>
+</ng-template>

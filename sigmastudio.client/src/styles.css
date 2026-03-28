@@ -1,6 +1,7 @@
 /* Светлая тема */
 :root {
   --header-height: 80px;
+  scroll-behavior: smooth;
 }
 
 body.light-theme {

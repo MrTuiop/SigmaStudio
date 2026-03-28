@@ -7,20 +7,24 @@ import { authGuard } from './core/guards/auth.guard';
 import { ProjectsPage } from './features/projects/projects';
 import { AboutPage } from './features/about/about';
 import { ChatPage } from './features/chat/chat';
-import { AdminPage } from './features/admin/admin';
 import { CloudPage } from './features/cloud/cloud';
 import { roleGuard } from './core/guards/role.guard';
-import { ProfilePage } from './features/profile/profile';
 import { AdminDashboardPage } from './features/admin/dashboard/dashboard';
 import { AdminUsersPage } from './features/admin/users/users';
+import { ProfileDashboardPage } from './features/profile/dashboard/dashboard';
+import { ProfileSecurityPage } from './features/profile/security/security';
 
 const routes: Routes = [
-  { path: '', component: HomePage },
-  { path: 'projects', component: ProjectsPage },
+  { path: '', component: HomePage, data: { pageTitle: '' }, title: 'SigmaStudio' },
+  { path: 'projects', component: ProjectsPage, data: {pageTitle: 'Проекты'}, title: 'Проекты' },
   { path: 'chat', component: ChatPage },
   {
     path: 'profile',
-    component: ProfilePage,
+    children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'dashboard', component: ProfileDashboardPage },
+      { path: 'security', component: ProfileSecurityPage }
+    ],
     canActivate: [authGuard]
   },
   {
@@ -43,7 +47,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    scrollPositionRestoration: 'enabled',
+    scrollOffset: [0, 0]
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

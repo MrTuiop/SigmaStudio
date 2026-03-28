@@ -38,4 +38,39 @@ export class ProfileService {
       })
     );
   }
+
+  updateProfileField<T extends keyof ProfileModel>(
+    field: T,
+    value: ProfileModel[T]
+  ): Observable<ProfileModel> {
+    const current = this._profile();
+    if (!current) return throwError(() => new Error('Profile not loaded'));
+
+    this._profile.set({ ...current, [field]: value });
+    return this.http.patch<ProfileModel>(`${this.apiUrl}/field`, { field, value }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        this._profile.set(current);
+        console.error(`Ошибка обновления поля ${field}`, error);
+        return throwError(() => error);
+      })
+    )
+  }
+
+  uploadProfileAvatar(file: File): Observable<{ avatarUrl: string }> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.http.post<{ avatarUrl: string }>(`${this.apiUrl}/avatar`, formData).pipe(
+      tap(response => {
+        const current = this._profile();
+        if (current) {
+          this._profile.set({ ...current, avatarUrl: response.avatarUrl });
+        }
+      }),
+      catchError((error: HttpErrorResponse) => {
+        console.error("Ошибка загрузки аватарки", error);
+        return throwError(() => error);
+      })
+    );
+  }
 }
