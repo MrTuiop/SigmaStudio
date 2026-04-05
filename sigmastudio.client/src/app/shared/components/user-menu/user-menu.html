@@ -4,7 +4,7 @@
   <button (click)="toggleMenu()" class="avatar-btn" title="Профиль">
 
     <!-- Если пользователь вошел и есть аватарка -->
-    <img [src]="userAvatarUrl" alt="Avatar" class="avatar-image" />
+    <img [src]="profileService.avatarUrl() ?? 'assets/images/default-avatar.png'" alt="Avatar" class="avatar-image" />
 
     <!-- Индикатор статуса (опционально) -->
     <span class="status-indicator" *ngIf="authService.isLoggedIn()"></span>

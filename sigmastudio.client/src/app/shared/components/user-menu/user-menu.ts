@@ -18,13 +18,6 @@ export class UserMenu implements OnInit {
 
   constructor(public authService: AuthService, public themeService: ThemeService, public profileService: ProfileService) { }
 
- 
-
-  get userAvatarUrl(): string {
-    const path = this.profileService.profile()?.avatarUrl;
-    return path && this.authService.isLoggedIn() ? path : this.defaultAvatarUrl;
-  }
-
   get displayUserName(): string {
     return this.profileService.profile()?.userName || 'Пользователь';
   }

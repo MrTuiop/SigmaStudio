@@ -29,12 +29,7 @@ export class ProfileDashboardPage {
       { key: 'email', label: 'Почта', type: 'email' },
       { key: 'dateOfBirth', label: 'Дата рождения', type: 'date' },
   ];
-  constructor(private profileService: ProfileService) { }
-
-  get userAvatarUrl(): string {
-    const path = this.profileService.profile()?.avatarUrl;
-    return path ? path : this.defaultAvatarUrl;
-  }
+  constructor(public profileService: ProfileService) { }
 
   startEdit(field: keyof ProfileModel): void {
     const current = this.profile();

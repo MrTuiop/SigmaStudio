@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, computed, signal } from '@angular/core';
 import { ProfileModel } from '../models/profile.model'
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, tap, throwError, catchError } from 'rxjs';
@@ -8,9 +8,23 @@ import { AuthService } from '../../auth/services/auth.service';
   providedIn: 'root',
 })
 export class ProfileService {
-  private readonly apiUrl = 'http://localhost:5292/api/profile';
+  private readonly apiUrl = '/api/profile';
   private _profile = signal<ProfileModel | null>(null);
   public readonly profile = this._profile.asReadonly();
+
+  private _avatarCacheVersion = signal(0);
+
+  public readonly avatarUrl = computed(() => {
+    const url = this._profile()?.avatarUrl;
+    if (!url) return null;
+    
+    const separator = url.includes('?') ? '&' : '?';
+    return `${url}${separator}_v=${this._avatarCacheVersion()}`;
+  });
+
+  public bumpAvatarCache(): void {
+    this._avatarCacheVersion.update(v => v + 1);
+  }
 
   constructor(private http: HttpClient, private authService: AuthService) {
     if (this.authService.isLoggedIn()) {
@@ -66,6 +80,7 @@ export class ProfileService {
         if (current) {
           this._profile.set({ ...current, avatarUrl: response.avatarUrl });
         }
+        this.bumpAvatarCache();
       }),
       catchError((error: HttpErrorResponse) => {
         console.error("Ошибка загрузки аватарки", error);

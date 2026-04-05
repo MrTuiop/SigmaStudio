@@ -42,6 +42,7 @@ import {
   Pencil,
   Save,
   X,
+  ImagePlus
 } from 'lucide-angular';
 import { AdminDashboardPage } from './features/admin/dashboard/dashboard';
 import { AdminUsersPage } from './features/admin/users/users';
@@ -93,6 +94,7 @@ import { ProfileSecurityPage } from './features/profile/security/security';
       Pencil,
       Save,
       X,
+      ImagePlus,
     }),
   ],
   providers: [
