@@ -14,8 +14,6 @@ export class UserMenu implements OnInit {
   isDarkTheme = false;
   isMenuOpen = false;
 
-  defaultAvatarUrl = "assets/default-avatar.png";
-
   constructor(public authService: AuthService, public themeService: ThemeService, public profileService: ProfileService) { }
 
   get displayUserName(): string {

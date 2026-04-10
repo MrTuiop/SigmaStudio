@@ -1,4 +1,4 @@
-import { Injectable, computed, signal } from '@angular/core';
+import { Injectable, computed, effect, signal } from '@angular/core';
 import { ProfileModel } from '../models/profile.model'
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, tap, throwError, catchError } from 'rxjs';
@@ -32,6 +32,18 @@ export class ProfileService {
         error: (err) => console.warn('Не удалось загрузить профиль (возможно, токен истек)', err)
       });
     }
+
+    effect(() => {
+      if (authService.isLoggedIn()) {
+        // Если вошёл, но профиль не загружен — грузим
+        if (!this._profile()) {
+          this.loadProfile().subscribe();
+        }
+      } else {
+        // Если вышел — очищаем профиль
+        this._profile.set(null);
+      }
+    });
   }
 
   loadProfile(): Observable<ProfileModel> {
