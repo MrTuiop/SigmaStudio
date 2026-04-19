@@ -1,9 +1,9 @@
-/* Светлая тема */
 :root {
   --header-height: 80px;
   scroll-behavior: smooth;
 }
 
+/* Светлая тема */
 body.light-theme {
   --bg-primary: #F8FAFC; /* Основной фон страницы */
   --bg-secondary: #FFFFFF; /* Фон хедера, карточек */
