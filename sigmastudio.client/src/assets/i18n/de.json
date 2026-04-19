@@ -1,0 +1,10 @@
+{
+  "app": {
+    "nav": {
+      "projects": "Projekte",
+      "chat": "Chat",
+      "adminPanel": "Admin-Bereich",
+      "cloud": "Cloud"
+    }
+  }
+}

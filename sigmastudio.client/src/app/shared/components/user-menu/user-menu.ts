@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, inject } from '@angular/core';
 import { AuthService } from '../../../features/auth/services/auth.service'
 import { ThemeService } from '../../../core/services/theme.service'
 import { ProfileService } from '../../../features/profile/services/profile.service';

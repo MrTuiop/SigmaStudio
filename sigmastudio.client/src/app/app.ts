@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { every, filter, map } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,14 @@ import { every, filter, map } from 'rxjs/operators';
 export class App implements OnInit {
   pageTitle: string = '';
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    public translate: TranslateService
+  ) {
+    this.translate.setDefaultLang('ru');
+    this.translate.use('ru');
+  }
 
   ngOnInit() {
     this.router.events.pipe(

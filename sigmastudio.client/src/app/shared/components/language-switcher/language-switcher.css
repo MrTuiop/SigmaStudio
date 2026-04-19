@@ -1,0 +1,47 @@
+.language-switcher {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.lang-btn {
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 40px;
+}
+
+  /* Ховер только для неактивных кнопок */
+  .lang-btn:hover:not(.active) {
+    color: var(--text-primary);
+    background: var(--bg-hover);
+  }
+
+  /* Активная кнопка */
+  .lang-btn.active {
+    color: #ffffff; /* Белый текст отлично контрастирует с твоим primary */
+    background: var(--primary);
+    font-weight: 600;
+    box-shadow: var(--shadow-sm);
+  }
+
+    /* Ховер активной кнопки */
+    .lang-btn.active:hover {
+      background: var(--primary-hover);
+    }
+
+  /* Фокус для доступности */
+  .lang-btn:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }

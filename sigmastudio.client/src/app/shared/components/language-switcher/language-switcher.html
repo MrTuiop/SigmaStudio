@@ -1,0 +1,12 @@
+<div class="language-switcher" role="group" aria-label="Выбор языка">
+  @for (lang of languages; track lang) {
+  <button type="button"
+          class="lang-btn"
+          [class.active]="isActive(lang)"
+          (click)="switchLanguage(lang)"
+          [attr.aria-pressed]="isActive(lang)"
+          [attr.aria-label]="'Переключить на ' + languageLabels[lang]">
+    {{ languageLabels[lang] }}
+  </button>
+  }
+</div>

@@ -4,12 +4,12 @@
   <div class="header-top-bar">
     <div class="header-top-container">
       <nav class="header-top-nav">
-        <a routerLink="/projects" routerLinkActive="active-link-small">Проекты</a>
+        <a routerLink="/projects" routerLinkActive="active-link-small">{{ 'app.nav.projects' | translate }}</a>
         <!--<a routerLink="/about" routerLinkActive="active-link-small">Обо мне</a>-->
-        <a routerLink="/chat" routerLinkActive="active-link-small">Чат</a>
+        <a routerLink="/chat" routerLinkActive="active-link-small">{{ 'app.nav.chat' | translate }}</a>
         <ng-container *ngIf="authService.hasRole('Admin')">
-          <a routerLink="/admin" routerLinkActive="active-link-small">Админ-панель</a>
-          <a routerLink="/cloud" routerLinkActive="active-link-small">Облако</a>
+          <a routerLink="/admin" routerLinkActive="active-link-small">{{ 'app.nav.adminPanel' | translate }}</a>
+          <a routerLink="/cloud" routerLinkActive="active-link-small">{{ 'app.nav.cloud' | translate }}</a>
         </ng-container>
       </nav>
     </div>

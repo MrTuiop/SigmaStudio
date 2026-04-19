@@ -2,6 +2,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader, provideTranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient } from '@angular/common/http';
+
 import { AppRoutingModule } from './app-routing-module'; // ← Проверь точку!
 import { App } from './app';
 import { Header } from './shared/components/header/header';
@@ -43,12 +47,17 @@ import {
   Pencil,
   Save,
   X,
-  ImagePlus
+  ImagePlus,
 } from 'lucide-angular';
 import { AdminDashboardPage } from './features/admin/dashboard/dashboard';
 import { AdminUsersPage } from './features/admin/users/users';
 import { ProfileDashboardPage } from './features/profile/dashboard/dashboard';
 import { ProfileSecurityPage } from './features/profile/security/security';
+import { LanguageSwitcher } from './shared/components/language-switcher/language-switcher';
+
+export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
+  return new TranslateHttpLoader();
+}
 
 @NgModule({
   declarations: [
@@ -69,12 +78,20 @@ import { ProfileSecurityPage } from './features/profile/security/security';
     AdminUsersPage,
     ProfileDashboardPage,
     ProfileSecurityPage,
+    LanguageSwitcher,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    TranslateModule.forRoot({
+      fallbackLang: 'ru',
+      loader: {
+        provide: TranslateLoader,
+        useClass: TranslateHttpLoader,
+      },
+    }),
     LucideAngularModule.pick({
       User,
       LogIn,
@@ -106,6 +123,10 @@ import { ProfileSecurityPage } from './features/profile/security/security';
       useClass: AuthInterceptor,
       multi: true,
     },
+    ...provideTranslateHttpLoader({
+      prefix: './assets/i18n/',
+      suffix: '.json',
+    }),
   ],
   bootstrap: [App],
 })

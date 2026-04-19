@@ -20,6 +20,8 @@
     "@angular/platform-browser": "^21.2.0",
     "@angular/router": "^21.2.0",
     "@auth0/angular-jwt": "^5.2.0",
+    "@ngx-translate/core": "^17.0.0",
+    "@ngx-translate/http-loader": "^17.0.0",
     "jest-editor-support": "*",
     "lucide-angular": "^0.577.0",
     "run-script-os": "*",
