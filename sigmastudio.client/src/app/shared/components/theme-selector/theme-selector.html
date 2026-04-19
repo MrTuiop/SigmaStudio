@@ -1,0 +1,9 @@
+<div class="theme-selector">
+  @for (theme of themes; track theme) {
+  <button class="theme-circle"
+          [class.active]="themeService.currentTheme() === theme"
+          [style.--circle-color]="circleColors[theme]"
+          (click)="themeService.setTheme(theme)"
+          [attr.aria-label]="'Выбрать тему: ' + theme"></button>
+  }
+</div>

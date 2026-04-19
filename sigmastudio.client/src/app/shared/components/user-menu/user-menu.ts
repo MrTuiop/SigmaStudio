@@ -1,7 +1,8 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { AuthService } from '../../../features/auth/services/auth.service'
-import { ThemeService } from '../../../core/services/theme'
+import { ThemeService } from '../../../core/services/theme.service'
 import { ProfileService } from '../../../features/profile/services/profile.service';
+
 
 @Component({
   selector: 'app-user-menu',
@@ -33,10 +34,6 @@ export class UserMenu implements OnInit {
 
   closeMenu(): void {
     this.isMenuOpen = false;
-  }
-
-  toggleTheme(): void {
-    this.themeService.toggleTheme();
   }
 
   logout(): void {

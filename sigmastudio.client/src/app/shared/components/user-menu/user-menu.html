@@ -43,10 +43,11 @@
     <div class="menu-divider"></div>
 
     <div class="menu-section">
-      <button (click)="toggleTheme()" class="menu-item">
+      <div class="menu-item">
         <lucide-icon name="palette" size="18"></lucide-icon>
-        <span>{{ 'Выбрать тему' }}</span>
-      </button>
+        <app-theme-selector></app-theme-selector>
+      </div>
+      
       <button class="menu-item">
         <lucide-icon name="globe" size="18"></lucide-icon>
         <span>{{ 'Выбрать язык' }}</span>

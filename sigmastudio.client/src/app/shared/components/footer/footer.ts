@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../../features/auth/services/auth.service';
-import { ThemeService } from '../../../core/services/theme';
+import { ThemeService } from '../../../core/services/theme.service';
 
 @Component({
   selector: 'app-footer',

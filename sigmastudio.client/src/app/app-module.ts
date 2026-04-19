@@ -7,6 +7,7 @@ import { App } from './app';
 import { Header } from './shared/components/header/header';
 import { Footer } from './shared/components/footer/footer';
 import { UserMenu } from './shared/components/user-menu/user-menu';
+import { ThemeSelector } from './shared/components/theme-selector/theme-selector';
 import { LoginComponent } from './features/auth/components/login/login';
 import { RegisterComponent } from './features/auth/components/register/register';
 
@@ -55,6 +56,7 @@ import { ProfileSecurityPage } from './features/profile/security/security';
     Header,
     Footer,
     UserMenu,
+    ThemeSelector,
     LoginComponent,
     RegisterComponent,
     HomePage,
