@@ -8,5 +8,6 @@ namespace SigmaStudio.Server.Entities
         public string? LastName { get; set; }
         public DateOnly? DateOfBirth { get; set; }
         public string? AvatarUrl { get; set; }
+        public long AvatarVersion { get; set; } = 0;
     }
 }

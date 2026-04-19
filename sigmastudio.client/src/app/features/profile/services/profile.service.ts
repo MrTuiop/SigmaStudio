@@ -12,36 +12,23 @@ export class ProfileService {
   private _profile = signal<ProfileModel | null>(null);
   public readonly profile = this._profile.asReadonly();
 
-  private _avatarCacheVersion = signal(0);
-
-  public readonly avatarUrl = computed(() => {
-    const url = this._profile()?.avatarUrl;
-    if (!url) return null;
-    
-    const separator = url.includes('?') ? '&' : '?';
-    return `${url}${separator}_v=${this._avatarCacheVersion()}`;
-  });
-
-  public bumpAvatarCache(): void {
-    this._avatarCacheVersion.update(v => v + 1);
-  }
+  private _isLoading = signal(false);
 
   constructor(private http: HttpClient, private authService: AuthService) {
-    if (this.authService.isLoggedIn()) {
-      this.loadProfile().subscribe({
-        error: (err) => console.warn('Не удалось загрузить профиль (возможно, токен истек)', err)
-      });
-    }
-
     effect(() => {
-      if (authService.isLoggedIn()) {
-        // Если вошёл, но профиль не загружен — грузим
-        if (!this._profile()) {
-          this.loadProfile().subscribe();
-        }
-      } else {
-        // Если вышел — очищаем профиль
+      const isLoggedIn = authService.isLoggedIn();
+      const hasProfile = !!this._profile();
+      const isLoading = this._isLoading();
+
+      if (isLoggedIn && !hasProfile && !isLoading) {
+        this._isLoading.set(true);
+        this.loadProfile().subscribe({
+          next: () => this._isLoading.set(false),
+          error: () => this._isLoading.set(false)
+        });
+      } else if (!isLoggedIn) {
         this._profile.set(null);
+        this._isLoading.set(false);
       }
     });
   }
@@ -88,11 +75,7 @@ export class ProfileService {
 
     return this.http.post<{ avatarUrl: string }>(`${this.apiUrl}/avatar`, formData).pipe(
       tap(response => {
-        const current = this._profile();
-        if (current) {
-          this._profile.set({ ...current, avatarUrl: response.avatarUrl });
-        }
-        this.bumpAvatarCache();
+        this._profile.update(p => p ? { ...p, avatarUrl: response.avatarUrl } : null);
       }),
       catchError((error: HttpErrorResponse) => {
         console.error("Ошибка загрузки аватарки", error);

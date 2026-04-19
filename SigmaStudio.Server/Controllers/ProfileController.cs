@@ -45,7 +45,9 @@ namespace SigmaStudio.Server.Controllers
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 DateOfBirth = user.DateOfBirth,
-                AvatarUrl = user.AvatarUrl
+                AvatarUrl = !string.IsNullOrEmpty(user.AvatarUrl)
+                    ? $"{user.AvatarUrl}?v={user.AvatarVersion}"
+                    : null
             };
 
             return Ok(profile);
@@ -218,26 +220,27 @@ namespace SigmaStudio.Server.Controllers
 
                 var avatarUrl = $"/uploads/avatars/{avatarFileName}";
 
-                if (user.AvatarUrl != avatarUrl)
+
+                user.AvatarUrl = avatarUrl;
+                user.AvatarVersion = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+                var result = await _userManager.UpdateAsync(user);
+
+                if (!result.Succeeded)
                 {
-                    user.AvatarUrl = avatarUrl;
-                    var result = await _userManager.UpdateAsync(user);
-
-                    if (!result.Succeeded)
+                    if (System.IO.File.Exists(filePath))
                     {
-                        if (System.IO.File.Exists(filePath))
-                        {
-                            System.IO.File.Delete(filePath);
-                        }
-
-                        var errors = result.Errors.Select(e => e.Description).ToArray();
-                        return BadRequest(new { Message = "Ошибка сохранения аватарки", Errors = errors });
+                        System.IO.File.Delete(filePath);
                     }
+
+                    var errors = result.Errors.Select(e => e.Description).ToArray();
+                    return BadRequest(new { Message = "Ошибка сохранения аватарки", Errors = errors });
                 }
+
+                var avatarUrlWithVersion = $"{avatarUrl}?v={user.AvatarVersion}";
 
                 return Ok(new AvatarUploadResponse
                 {
-                    AvatarUrl = avatarUrl,
+                    AvatarUrl = avatarUrlWithVersion,
                     Message = "Аватарка успешно загружена"
                 });
             }
