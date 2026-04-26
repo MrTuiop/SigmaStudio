@@ -13,10 +13,24 @@ import { AdminDashboardPage } from './features/admin/dashboard/dashboard';
 import { AdminUsersPage } from './features/admin/users/users';
 import { ProfileDashboardPage } from './features/profile/dashboard/dashboard';
 import { ProfileSecurityPage } from './features/profile/security/security';
+import { ProjectPage } from './features/projects/project/project';
 
 const routes: Routes = [
   { path: '', component: HomePage, data: { pageTitle: '' }, title: 'SigmaStudio' },
-  { path: 'projects', component: ProjectsPage, data: {pageTitle: 'Проекты'}, title: 'Проекты' },
+  {
+    path: 'projects',
+    data: { pageTitle: 'Проекты' },
+    title: 'Проекты',
+    children: [
+      { path: '', component: ProjectsPage },     
+      {
+        path: ':slug',                               
+        component: ProjectPage,
+        data: { pageTitle: 'Детали проекта' },
+        title: 'Просмотр проекта'
+      }
+    ]
+  },
   { path: 'chat', component: ChatPage },
   {
     path: 'profile',
