@@ -112,6 +112,40 @@ app-user-menu {
   font-weight: 600;
 }
 
+/* Делаем кнопку визуально неотличимой от ссылки */
+.header-main-nav .back-btn {
+  /* Сброс браузерных стилей кнопки */
+  background: none;
+  border: none;
+  margin: 0;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* Точное повторение ваших стилей навигации */
+  color: var(--text-secondary);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 1.5rem;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+  .header-main-nav .back-btn:hover {
+    background: var(--bg-hover);
+    color: var(--primary);
+  }
+
+  /* Синхронизация с вашим .active-link */
+  .header-main-nav .back-btn.active-link {
+    color: var(--primary);
+    border-bottom: 3px solid var(--primary);
+  }
+
 /* Адаптивность: скрываем верхнюю панель на мобильных, чтобы не занимала место */
 @media (max-width: 768px) {
   .header-top-bar {

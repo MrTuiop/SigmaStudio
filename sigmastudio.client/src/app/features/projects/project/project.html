@@ -1,7 +1,5 @@
 @if (project(); as p) {
 <section class="detail-container">
-  <button routerLink="/projects" class="back-btn">← Назад к проектам</button>
-
   <header class="detail-header">
     <h1>{{ p.title }}</h1>
     <a [href]="p.githubUrl" target="_blank" rel="noopener" class="github-btn">

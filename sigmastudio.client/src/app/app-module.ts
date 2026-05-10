@@ -55,6 +55,7 @@ import { ProfileDashboardPage } from './features/profile/dashboard/dashboard';
 import { ProfileSecurityPage } from './features/profile/security/security';
 import { LanguageSwitcher } from './shared/components/language-switcher/language-switcher';
 import { ProjectPage } from './features/projects/project/project';
+import { ProjectEditPage } from './features/projects/project/project-edit/project-edit';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
   return new TranslateHttpLoader();
@@ -81,6 +82,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
     ProfileSecurityPage,
     LanguageSwitcher,
     ProjectPage,
+    ProjectEditPage,
   ],
   imports: [
     BrowserModule,

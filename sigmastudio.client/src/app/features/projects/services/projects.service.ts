@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { ProjectModel } from '../models/project.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -20,5 +21,9 @@ export class ProjectsService {
 
   getBySlug(slug: string) {
     return this.http.get<ProjectModel>(`${this.apiUrl}/${slug}`);
+  }
+
+  updateProject(slug: string, data: any): Observable<ProjectModel> {
+    return this.http.put<ProjectModel>(`${this.apiUrl}/${slug}`, data);
   }
 }

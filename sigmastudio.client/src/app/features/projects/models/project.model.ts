@@ -6,7 +6,7 @@ export interface ProjectSection {
 export interface ProjectModel {
   id: number;
   title: string;
-  slug?: string;
+  slug: string;
   description: string;
   imageUrl: string;
   githubUrl: string;

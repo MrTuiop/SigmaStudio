@@ -36,22 +36,35 @@
 
     <nav class="header-main-nav" *ngIf="isInSection">
       <!-- Кнопка НАЗАД -->
-      <a routerLink="/">
+      <button type="button" class="back-btn" (click)="goBack()">
         <lucide-icon name="arrow-left" class="test2"></lucide-icon>
         <span>&nbsp; Назад</span>
-      </a>
+      </button>
 
       <!-- Ссылки для Админки -->
-      <ng-container *ngIf="currentSection === '/admin'">
+      <ng-container *ngIf="currentSection === 'admin'">
         <a routerLink="/admin/dashboard" routerLinkActive="active-link">Главная</a>
         <a routerLink="/admin/users" routerLinkActive="active-link">Пользователи</a>
         <a routerLink="/admin/settings" routerLinkActive="active-link">Настройки</a>
       </ng-container>
 
       <!-- Ссылки для Профиля -->
-      <ng-container *ngIf="currentSection === '/profile'">
+      <ng-container *ngIf="currentSection === 'profile'">
         <a routerLink="/profile/dashboard" routerLinkActive="active-link">Профиль</a>
         <a routerLink="/profile/security" routerLinkActive="active-link">Безопасность</a>
+      </ng-container>
+
+      <!-- Ссылки для Проектов -->
+      <ng-container *ngIf="currentSection === 'projects' && !projectSlug">
+        <a routerLink="/projects" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Все проекты</a>
+        <a *ngIf="projectSlug" [routerLink]="['/projects', projectSlug]" routerLinkActive="active-link">Просмотр проекта</a>
+        <a routerLink="/projects/create" routerLinkActive="active-link">Создать проект</a>
+      </ng-container>
+
+      <!-- Ссылки для Проекта -->
+      <ng-container *ngIf="currentSection === 'projects' && projectSlug">
+        <a *ngIf="projectSlug" [routerLink]="['/projects', projectSlug]" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Просмотр проекта</a>
+        <a [routerLink]="['/projects', projectSlug, 'edit']" routerLinkActive="active-link">Редактировать проект</a>
       </ng-container>
     </nav>
 

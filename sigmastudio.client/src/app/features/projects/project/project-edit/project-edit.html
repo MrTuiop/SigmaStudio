@@ -1,0 +1,110 @@
+<div class="edit-container">
+  <header class="edit-header">
+    <h1>Редактирование: {{ project.title }}</h1>
+  </header>
+
+  @if (error()) {
+  <div class="alert error">{{ error() }}</div>
+  }
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="edit-form" [class.loading]="isLoading()">
+
+    <div class="form-group">
+      <label for="title">Название *</label>
+      <input id="title" formControlName="title" type="text" placeholder="Например: Task Manager API">
+      @if (form.get('title')?.invalid && form.get('title')?.touched) {
+      <span class="error-text">Название обязательно и должно быть не короче 3 символов</span>
+      }
+    </div>
+
+    <div class="form-group slug-group">
+      <label for="slug">URL-адрес (slug) *</label>
+      <div class="slug-input-wrapper">
+        <span class="slug-prefix">/projects/</span>
+        <input id="slug" formControlName="slug" type="text" placeholder="task-manager-api" class="slug-input">
+        <button type="button" class="btn-generate" (click)="generateSlug()" title="Сгенерировать из названия">✨</button>
+      </div>
+      @if (form.get('slug')?.errors?.['required'] && form.get('slug')?.touched) {
+      <span class="error-text">Адрес обязателен</span>
+      } @else if (form.get('slug')?.errors?.['invalidSlug'] && form.get('slug')?.touched) {
+      <span class="error-text">Только строчные латинские буквы, цифры и дефисы (например: my-project-123)</span>
+      } @else if (form.get('slug')?.errors?.['slugExists'] && form.get('slug')?.touched) {
+      <span class="error-text">Этот адрес уже используется другим проектом</span>
+      } @else if (form.get('slug')?.errors?.['minlength'] || form.get('slug')?.errors?.['maxlength']) {
+      <span class="error-text">Длина от 3 до 100 символов</span>
+      }
+      <small class="hint">Изменение адреса приведёт к смене ссылки на проект. Старая ссылка перестанет работать.</small>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Описание *</label>
+      <textarea id="description" formControlName="description" rows="3" placeholder="Краткое описание проекта..."></textarea>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group half">
+        <label for="imageUrl">URL обложки</label>
+        <input id="imageUrl" formControlName="imageUrl" type="url" placeholder="https://...">
+      </div>
+      <div class="form-group half">
+        <label for="githubUrl">Ссылка на GitHub</label>
+        <input id="githubUrl" formControlName="githubUrl" type="url" placeholder="https://github.com/...">
+      </div>
+    </div>
+
+    <fieldset class="array-field">
+      <legend>Стек технологий</legend>
+      <div formArrayName="techStack">
+        @for (stack of techStack.controls; track $index) {
+        <div class="array-item">
+          <input [formControlName]="$index" placeholder="ASP.NET Core">
+          <button type="button" class="btn-remove" (click)="removeTechStack($index)" aria-label="Удалить">×</button>
+        </div>
+        }
+      </div>
+      <button type="button" class="btn-add" (click)="addTechStack()">+ Добавить технологию</button>
+    </fieldset>
+
+    <fieldset class="array-field">
+      <legend>Скриншоты</legend>
+      <div formArrayName="screenshots">
+        @for (shot of screenshots.controls; track $index) {
+        <div class="array-item">
+          <input [formControlName]="$index" type="url" placeholder="https://...">
+          <button type="button" class="btn-remove" (click)="removeScreenshot($index)" aria-label="Удалить">×</button>
+        </div>
+        }
+      </div>
+      <button type="button" class="btn-add" (click)="addScreenshot()">+ Добавить скриншот</button>
+    </fieldset>
+
+    <fieldset class="array-field">
+      <legend>Разделы проекта</legend>
+      <div formArrayName="sections">
+        @for (section of sections.controls; track $index) {
+        <div [formGroupName]="$index" class="section-item">
+          <div class="form-row">
+            <div class="form-group half">
+              <label>Заголовок</label>
+              <input formControlName="title" placeholder="Например: Архитектура">
+            </div>
+            <button type="button" class="btn-remove" (click)="removeSection($index)" aria-label="Удалить раздел">×</button>
+          </div>
+          <div class="form-group">
+            <label>Содержимое</label>
+            <textarea formControlName="content" rows="2" placeholder="Описание раздела..."></textarea>
+          </div>
+        </div>
+        }
+      </div>
+      <button type="button" class="btn-add" (click)="addSection()">+ Добавить раздел</button>
+    </fieldset>
+
+    <div class="form-actions">
+      <button type="button" class="btn-secondary" (click)="cancel()">Отмена</button>
+      <button type="submit" class="btn-primary" [disabled]="isLoading()">
+        {{ isLoading() ? 'Сохранение...' : 'Сохранить изменения' }}
+      </button>
+    </div>
+  </form>
+</div>

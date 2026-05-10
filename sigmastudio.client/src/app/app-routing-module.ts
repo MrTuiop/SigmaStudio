@@ -9,11 +9,14 @@ import { AboutPage } from './features/about/about';
 import { ChatPage } from './features/chat/chat';
 import { CloudPage } from './features/cloud/cloud';
 import { roleGuard } from './core/guards/role.guard';
+import { ProjectGuard } from './core/guards/project-guard';
 import { AdminDashboardPage } from './features/admin/dashboard/dashboard';
 import { AdminUsersPage } from './features/admin/users/users';
 import { ProfileDashboardPage } from './features/profile/dashboard/dashboard';
 import { ProfileSecurityPage } from './features/profile/security/security';
 import { ProjectPage } from './features/projects/project/project';
+import { ProjectResolver } from './features/projects/resolvers/project.resolver';
+import { ProjectEditPage } from './features/projects/project/project-edit/project-edit';
 
 const routes: Routes = [
   { path: '', component: HomePage, data: { pageTitle: '' }, title: 'SigmaStudio' },
@@ -26,8 +29,18 @@ const routes: Routes = [
       {
         path: ':slug',                               
         component: ProjectPage,
-        data: { pageTitle: 'Детали проекта' },
+        canActivate: [ProjectGuard],
+        resolve: { project: ProjectResolver },
+        data: { pageTitle: '' },
         title: 'Просмотр проекта'
+      },
+      {
+        path: ':slug/edit',
+        component: ProjectEditPage,
+        canActivate: [ProjectGuard],
+        resolve: { project: ProjectResolver },
+        title: 'Редактирование проекта',
+        data: { pageTitle: '' }
       }
     ]
   },

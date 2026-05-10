@@ -1,108 +1,201 @@
+/* ================= ОСНОВНОЙ КОНТЕЙНЕР ================= */
 .detail-container {
-  max-width: 900px;
+  max-width: 960px;
   margin: 2rem auto;
-  padding: 0 1rem;
+  padding: 0 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left; /* Явно выравниваем контент по левому краю */
 }
 
-.back-btn {
-  background: none;
-  border: none;
-  color: #0056b3;
-  cursor: pointer;
-  font-size: 1rem;
-  margin-bottom: 1.5rem;
-  padding: 0;
-}
-
+/* ================= ШАПКА ПРОЕКТА ================= */
 .detail-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e5e7eb;
 }
+
+  .detail-header h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #111827;
+    line-height: 1.2;
+  }
 
 .github-btn {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: #24292e;
+  background: #0f172a;
   color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
   text-decoration: none;
-  transition: background 0.2s;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: background 0.2s, transform 0.1s;
+  flex-shrink: 0; /* Кнопка не сжимается на мобильных */
 }
 
   .github-btn:hover {
-    background: #000;
+    background: #1e293b;
+    transform: translateY(-1px);
   }
 
+/* ================= ОПИСАНИЕ ================= */
 .detail-desc {
   font-size: 1.1rem;
-  color: #444;
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
-}
-
-.tech-stack {
+  color: #4b5563;
+  line-height: 1.7;
   margin-bottom: 2rem;
 }
+
+/* ================= ТЕХНОЛОГИИ ================= */
+.tech-stack {
+  margin-bottom: 2.5rem;
+}
+
+  .tech-stack strong {
+    font-size: 1rem;
+    color: #374151;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
 
 .tags {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-top: 0.5rem;
 }
 
 .tag {
-  background: #e9ecef;
-  padding: 0.3rem 0.8rem;
+  background: #f3f4f6;
+  color: #374151;
+  padding: 0.4rem 0.9rem;
   border-radius: 99px;
-  font-size: 0.9rem;
-  color: #333;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: 1px solid #e5e7eb;
 }
 
-.screenshots, .sections {
-  margin: 2rem 0;
+/* ================= СКРИНШОТЫ ================= */
+.screenshots,
+.sections {
+  margin: 2.5rem 0;
 }
+
+  .screenshots h2,
+  .sections h2 {
+    font-size: 1.4rem;
+    color: #111827;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
 
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-  margin-top: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
 }
 
-.gallery-item img {
-  width: 100%;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+.gallery-item {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  background: #f9fafb;
 }
 
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.02);
+  }
+
+/* ================= РАЗДЕЛЫ (АККОРДЕОН) ================= */
 .accordion {
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  margin-bottom: 0.5rem;
-  padding: 0.5rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  background: #fff;
 }
 
   .accordion summary {
     cursor: pointer;
     font-weight: 600;
-    padding: 0.5rem 0;
+    padding: 1rem;
+    color: #111827;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+    /* Скрываем стандартный маркер браузера */
+    .accordion summary::-webkit-details-marker {
+      display: none;
+    }
+
+    /* Кастомная стрелка */
+    .accordion summary::after {
+      content: "▼";
+      font-size: 0.8em;
+      transition: transform 0.2s;
+      color: #6b7280;
+    }
+
+  .accordion[open] summary::after {
+    transform: rotate(180deg);
   }
 
   .accordion p {
-    margin: 0.5rem 0 1rem;
-    color: #555;
-    line-height: 1.5;
+    margin: 0;
+    padding: 0 1rem 1rem;
+    color: #4b5563;
+    line-height: 1.6;
   }
 
+/* ================= ЗАГРУЗКА ================= */
 .loading {
   text-align: center;
-  color: #666;
-  margin-top: 3rem;
+  color: #6b7280;
+  margin-top: 4rem;
+  font-size: 1.1rem;
+}
+
+/* ================= АДАПТИВ ================= */
+@media (max-width: 768px) {
+  .detail-container {
+    margin: 1.5rem auto;
+    padding: 0 1rem;
+  }
+
+  .detail-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+    .detail-header h1 {
+      font-size: 1.5rem;
+    }
+
+  .github-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .gallery {
+    grid-template-columns: 1fr;
+  }
 }

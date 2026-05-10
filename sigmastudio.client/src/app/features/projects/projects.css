@@ -1,7 +1,8 @@
 .project-card-link {
-  text-decoration: none; 
+  text-decoration: none;
   color: inherit;
   display: block;
+  transition: color 0.3s ease;
 }
 
   .project-card-link h2,
@@ -21,7 +22,8 @@ h1 {
   text-align: center;
   margin-bottom: 2rem;
   font-size: 2rem;
-  color: #111;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
 }
 
 .projects-list {
@@ -32,16 +34,16 @@ h1 {
 
 .project-card {
   display: flex;
-  background: #fff;
+  background: var(--bg-secondary);
   border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-md);
   overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
 }
 
   .project-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+    box-shadow: var(--shadow-lg);
   }
 
 .project-info {
@@ -56,38 +58,41 @@ h1 {
   .project-info h2 {
     margin: 0;
     font-size: 1.4rem;
-    color: #1a1a1a;
+    color: var(--text-primary);
+    transition: color 0.3s ease;
   }
 
   .project-info p {
     margin: 0;
-    color: #555;
+    color: var(--text-secondary);
     line-height: 1.6;
     flex: 1;
+    transition: color 0.3s ease;
   }
 
 .github-link {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  color: #24292e;
+  color: var(--primary);
   text-decoration: none;
   font-weight: 500;
   padding: 0.6rem 1rem;
-  border: 2px solid #24292e;
+  border: 2px solid var(--primary);
   border-radius: 8px;
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
   width: fit-content;
 }
 
   .github-link:hover {
-    background: #24292e;
-    color: #fff;
+    background: var(--primary);
+    color: #ffffff; /* Белый текст на акцентном фоне остаётся универсальным */
   }
 
 .project-image {
   flex: 0 0 300px;
-  background: #f8f9fa;
+  background: var(--bg-hover);
+  transition: background 0.3s ease;
 }
 
   .project-image img {
@@ -99,9 +104,10 @@ h1 {
 
 .empty-state {
   text-align: center;
-  color: #666;
+  color: var(--text-secondary);
   font-style: italic;
   padding: 2rem 0;
+  transition: color 0.3s ease;
 }
 
 /* Адаптивность для мобильных */
