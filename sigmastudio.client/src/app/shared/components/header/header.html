@@ -58,13 +58,17 @@
       <ng-container *ngIf="currentSection === 'projects' && !projectSlug">
         <a routerLink="/projects" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Все проекты</a>
         <a *ngIf="projectSlug" [routerLink]="['/projects', projectSlug]" routerLinkActive="active-link">Просмотр проекта</a>
-        <a routerLink="/projects/create" routerLinkActive="active-link">Создать проект</a>
+        <ng-container *ngIf="authService.hasRole('Admin')">
+          <a routerLink="/projects/create" routerLinkActive="active-link">Создать проект</a>
+        </ng-container>
       </ng-container>
 
       <!-- Ссылки для Проекта -->
       <ng-container *ngIf="currentSection === 'projects' && projectSlug">
         <a *ngIf="projectSlug" [routerLink]="['/projects', projectSlug]" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Просмотр проекта</a>
-        <a [routerLink]="['/projects', projectSlug, 'edit']" routerLinkActive="active-link">Редактировать проект</a>
+        <ng-container *ngIf="authService.hasRole('Admin')">
+          <a [routerLink]="['/projects', projectSlug, 'edit']" routerLinkActive="active-link">Редактировать проект</a>
+        </ng-container>
       </ng-container>
     </nav>
 

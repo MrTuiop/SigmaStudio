@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ProfileService } from '../../../profile/services/profile.service';
+import { NotificationService } from '../../../../core/services/notification-service';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ export class LoginComponent {
 
   constructor(
     private fb: FormBuilder,
+    private notificationService: NotificationService,
     private authService: AuthService,
     private router: Router,
     private profileService: ProfileService
@@ -56,6 +58,10 @@ export class LoginComponent {
       },
       complete: () => {
         this.isLoading = false;
+        this.notificationService.showSuccess('Загружено');
+        this.notificationService.showError('Ошибка сети');
+        this.notificationService.showSuccess('Файл сохранён');
+        this.notificationService.showSuccess('Синхронизация...');
       }
     });
   }

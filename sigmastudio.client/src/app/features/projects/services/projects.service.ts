@@ -26,4 +26,8 @@ export class ProjectsService {
   updateProject(slug: string, data: any): Observable<ProjectModel> {
     return this.http.put<ProjectModel>(`${this.apiUrl}/${slug}`, data);
   }
+
+  createProject(dto: Partial<ProjectModel>): Observable<ProjectModel> {
+    return this.http.post<ProjectModel>(this.apiUrl, dto);
+  }
 }

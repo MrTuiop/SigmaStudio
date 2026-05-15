@@ -17,6 +17,7 @@ import { ProfileSecurityPage } from './features/profile/security/security';
 import { ProjectPage } from './features/projects/project/project';
 import { ProjectResolver } from './features/projects/resolvers/project.resolver';
 import { ProjectEditPage } from './features/projects/project/project-edit/project-edit';
+import { ProjectCreatePage } from './features/projects/project/project-create/project-create';
 
 const routes: Routes = [
   { path: '', component: HomePage, data: { pageTitle: '' }, title: 'SigmaStudio' },
@@ -25,7 +26,8 @@ const routes: Routes = [
     data: { pageTitle: 'Проекты' },
     title: 'Проекты',
     children: [
-      { path: '', component: ProjectsPage },     
+      { path: '', component: ProjectsPage },
+      { path: 'create', component: ProjectCreatePage },
       {
         path: ':slug',                               
         component: ProjectPage,

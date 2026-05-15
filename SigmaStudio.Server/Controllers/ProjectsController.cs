@@ -88,8 +88,36 @@ namespace SigmaStudio.Server.Controllers
             return Ok(projects);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] ProjectDto dto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            // Проверка уникальности slug
+            if (await _context.Projects.AnyAsync(p => p.Slug == dto.Slug))
+                return Conflict(new { message = $"Проект с адресом '/projects/{dto.Slug}' уже существует" });
+
+            var project = new ProjectModel
+            {
+                Title = dto.Title,
+                Slug = dto.Slug,
+                Description = dto.Description,
+                ImageUrl = dto.ImageUrl,
+                GithubUrl = dto.GithubUrl,
+                TechStack = dto.TechStack ?? new(),
+                Screenshots = dto.Screenshots ?? new(),
+                Sections = dto.Sections ?? new()
+            };
+
+            _context.Projects.Add(project);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetBySlug), new { slug = project.Slug }, project);
+        }
+
         // Добавление проекта project.Slug = model.Title.ToLower().Replace(" ", "-");
 
-        
+
     }
 }

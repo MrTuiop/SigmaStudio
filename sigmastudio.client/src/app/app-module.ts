@@ -56,6 +56,9 @@ import { ProfileSecurityPage } from './features/profile/security/security';
 import { LanguageSwitcher } from './shared/components/language-switcher/language-switcher';
 import { ProjectPage } from './features/projects/project/project';
 import { ProjectEditPage } from './features/projects/project/project-edit/project-edit';
+import { ProjectCreatePage } from './features/projects/project/project-create/project-create';
+import { NotificationComponent } from './shared/components/notification/notification';
+import { ErrorInterceptor } from './core/interceptors/error-interceptor';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
   return new TranslateHttpLoader();
@@ -83,6 +86,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
     LanguageSwitcher,
     ProjectPage,
     ProjectEditPage,
+    ProjectCreatePage,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,
@@ -125,6 +130,11 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
       multi: true,
     },
     ...provideTranslateHttpLoader({
